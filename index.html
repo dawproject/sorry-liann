@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hallo Sayang! ✨</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- PASTIKAN FILE STYLE.CSS SATU FOLDER DENGAN INDEX.HTML -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Pattern -->
+  <div class="grid-bg"></div>
+
+  <!-- Stickers Background -->
+  <div class="sticker sticker-smiley">😊</div>
+  <div class="sticker sticker-star">⭐</div>
+  <div class="sticker sticker-sparkle">🌸</div>
+  <div class="sticker sticker-heart-bubble">💬❤️</div>
+
+  <div class="main-container">
+
+    <!-- TAMPILAN 1: POPUP GREETING AWAL -->
+    <div id="step1" class="retro-window">
+      <div class="window-header">
+        <button class="close-btn" onclick="nextStep(2)">✕</button>
+      </div>
+      <div class="window-content">
+        <div class="gif-container">
+          <img src="https://dekatutorial.github.io/v/stkr/Stiker%2016.gif">
+        </div>
+        <h2 class="title-text">Hallo Liannn...</h2>
+        <button class="btn-primary" onclick="nextStep(2)">OK</button>
+      </div>
+    </div>
+
+    <!-- TAMPILAN 2: AMPLOP SURAT (Awalnya tersembunyi) -->
+    <div id="step2" class="envelope-scene hidden-step">
+      <div class="speech-bubble">
+        <span>Hai, ada surat buat kamu nich</span>
+      </div>
+      <div class="envelope-card" onclick="nextStep(3)">
+        <span class="env-icon">✉️</span>
+      </div>
+    </div>
+
+    <!-- TAMPILAN 3: SURAT INTERAKTIF (Awalnya tersembunyi) -->
+    <div id="step3" class="retro-window hidden-step">
+      <div class="window-header">
+        <span class="window-tag">For You ✨</span>
+        <button class="close-btn" onclick="nextStep(1)">✕</button>
+      </div>
+      <div class="window-content">
+        
+        <!-- Tabs Menu -->
+        <div class="tab-menu">
+          <button class="tab-btn active" onclick="switchTab('pesan', this)">Pesan</button>
+          <button class="tab-btn" onclick="switchTab('lagu', this)">Lagu</button>
+          <button class="tab-btn" onclick="switchTab('surat', this)">Surat</button>
+        </div>
+
+        <!-- TAB 1: PESAN -->
+        <div id="tab-pesan" class="tab-panel active">
+          <div class="paper-card">
+            <span class="paper-tag">~ Adam WInatra ~</span>
+            <p id="quoteText" class="quote-body">
+              "Maaf yaa buat hal yang tadi masalah kecil aku permasalhkan, aku gak pantes bilang kayak gitu ke kamu tadi, jadii aku buatin permohonan maaf ku lewat website karna ini spesiall buat kamu eaa.."
+            </p>
+            <button class="btn-secondary" onclick="randomQuote()">Acak Pesan Lagi 🎲</button>
+          </div>
+        </div>
+
+        <!-- TAB 2: LAGU -->
+        <div id="tab-lagu" class="tab-panel">
+          <div class="song-box">
+            <div class="song-row">
+              <div>
+                <h4>About You</h4>
+                <small>The 1975</small>
+              </div>
+              <button class="play-btn" onclick="playAudio('./1.mp3', this)">▶</button>
+            </div>
+            <div class="song-row">
+              <div>
+                <h4>Risk It All</h4>
+                <small>Bruno Mars</small>
+              </div>
+              <button class="play-btn" onclick="playAudio('./2.mp3', this)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: SURAT -->
+        <div id="tab-surat" class="tab-panel">
+          <div class="paper-card text-left">
+            <p>
+              Pesan dari aku : Aku buatin web ini satset pagi ini karena aku mau minta maaf ke kamu yaa, maaf kalau suka bikin kecewa, maaf kalo suka maksain, maaf kalau suka bikin kamu badmood, maaf yaa.. aku emang kesannya bersalah entah kenapa aku juga gamau kehilangan manusia tengil kali ini apalagi kamu harapan terakhir cuma karna sikapku tolong jangan ngilang yaa, aku bisa berubah kok, kalo gak suka sama sifatku atau kamu cape bilang aja ya, lebih baik ngomong duluan daripada telat, kalopun nantinya kita udah jadi orang yang cukup saling kenal aku harap website buatanku ini semua bisa mengenang sejauh mana aku berjalan yaa, aku masih banyak cuma aku kirim 1 per 1 biar kamu gak bosen hehe semangat yaa...
+            </p>
+            <div class="signature">— Sent with love</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

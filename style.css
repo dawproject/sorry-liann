@@ -1,0 +1,322 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier Prime', monospace;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #fde8dd;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Pattern Grid Background */
+.grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(235, 160, 135, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(235, 160, 135, 0.35) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 1;
+}
+
+/* Stiker Hiasan */
+.sticker {
+  position: absolute;
+  z-index: 2;
+  user-select: none;
+  filter: drop-shadow(2px 3px 0px #5c301c);
+}
+
+.sticker-smiley { top: 6%; left: 50%; transform: translateX(-50%); font-size: 2.2rem; }
+.sticker-star { top: 10%; left: 15%; font-size: 1.8rem; }
+.sticker-sparkle { top: 18%; left: 8%; font-size: 2rem; }
+.sticker-heart-bubble { 
+  bottom: 12%; 
+  right: 12%; 
+  font-size: 1.6rem; 
+  background: #fff; 
+  padding: 6px 10px; 
+  border: 2px solid #5c301c; 
+  border-radius: 12px; 
+  box-shadow: 3px 3px 0px #5c301c; 
+}
+
+/* Main Container */
+.main-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* KUNCI PENTING: MENYEMBUNYIKAN STEP LAIN */
+.hidden-step {
+  display: none !important;
+}
+
+/* Retro Window Box */
+.retro-window {
+  background: #ffffff;
+  border: 3px solid #5c301c;
+  border-radius: 16px;
+  width: 100%;
+  box-shadow: 6px 6px 0px #5c301c;
+  overflow: hidden;
+  animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popUp {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.window-header {
+  background: #fcd5b5;
+  border-bottom: 3px solid #5c301c;
+  padding: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 36px;
+}
+
+.window-tag {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #5c301c;
+}
+
+.close-btn {
+  background: #f8a096;
+  border: 2px solid #5c301c;
+  width: 22px;
+  height: 22px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #5c301c;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.window-content {
+  padding: 24px 18px;
+  text-align: center;
+}
+
+.gif-container img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.title-text {
+  font-size: 1.1rem;
+  color: #5c301c;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.btn-primary {
+  background: #8ec2f5;
+  border: 2.5px solid #5c301c;
+  padding: 8px 30px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #5c301c;
+  box-shadow: 2px 2px 0px #5c301c;
+  cursor: pointer;
+}
+
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Step 2: Amplop */
+.envelope-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  animation: popUp 0.3s ease;
+}
+
+.speech-bubble {
+  background: #ffffff;
+  border: 2.5px solid #5c301c;
+  border-radius: 12px;
+  padding: 10px 16px;
+  position: relative;
+  box-shadow: 3px 3px 0px #5c301c;
+}
+
+.speech-bubble span {
+  color: #5c301c;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 9px 9px 0;
+  border-style: solid;
+  border-color: #5c301c transparent;
+}
+
+.envelope-card {
+  width: 120px;
+  height: 85px;
+  background: #fcd5b5;
+  border: 2.5px solid #5c301c;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 0px #5c301c;
+}
+
+.env-icon {
+  font-size: 2.2rem;
+}
+
+/* Step 3 Tabs & Card */
+.tab-menu {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  border-bottom: 2px solid #5c301c;
+  padding-bottom: 8px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: #fde8dd;
+  border: 1.5px solid #5c301c;
+  padding: 6px 2px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #5c301c;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #5c301c;
+  color: #fff;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.paper-card {
+  background: #fff8f3;
+  border: 1.5px dashed #5c301c;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.paper-card.text-left {
+  text-align: left;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.paper-tag {
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: #ba6d4d;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.quote-body {
+  font-size: 0.82rem;
+  color: #422113;
+  line-height: 1.5;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary {
+  margin-top: 12px;
+  background: #fcd5b5;
+  border: 1.5px solid #5c301c;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #5c301c;
+  box-shadow: 2px 2px 0px #5c301c;
+  cursor: pointer;
+}
+
+.song-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.song-row {
+  background: #fff8f3;
+  border: 1.5px solid #5c301c;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.song-row h4 { font-size: 0.8rem; color: #5c301c; }
+.song-row small { font-size: 0.65rem; color: #8c573f; }
+
+.play-btn {
+  background: #5c301c;
+  color: #fff;
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.signature {
+  margin-top: 12px;
+  text-align: right;
+  font-weight: bold;
+  color: #ba6d4d;
+}
