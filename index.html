@@ -99,12 +99,25 @@
 
         <!-- TAB 3: SURAT -->
         <div id="tab-surat" class="tab-panel">
-          <div class="paper-card text-left">
+          
+          <!-- TAMPILAN TERKUNCI (PASSWORD) -->
+          <div id="surat-locked" class="paper-card">
+            <span class="paper-tag">🔒 SURAT TERKUNCI</span>
+            <p style="font-size: 0.8rem; margin-bottom: 12px; color: #5c301c;">Masukkan password untuk membuka surat ini:</p>
+            
+            <input type="password" id="passInput" placeholder="Password..." class="pw-input">
+            <button class="btn-secondary" onclick="checkPassword()">Buka Surat 🔓</button>
+            <p id="pwError" class="error-msg"></p>
+          </div>
+
+          <!-- TAMPILAN SURAT (AWALNYA HIDDEN) -->
+          <div id="surat-content" class="paper-card text-left hidden-step">
             <p>
               Pesan dari aku : Aku buatin web ini satset pagi ini karena aku mau minta maaf ke kamu yaa, maaf kalau suka bikin kecewa, maaf kalo suka maksain, maaf kalau suka bikin kamu badmood, maaf yaa.. aku emang kesannya bersalah entah kenapa aku juga gamau kehilangan manusia tengil kali ini apalagi kamu harapan terakhir cuma karna sikapku tolong jangan ngilang yaa, aku bisa berubah kok, kalo gak suka sama sifatku atau kamu cape bilang aja ya, lebih baik ngomong duluan daripada telat, kalopun nantinya kita udah jadi orang yang cukup saling kenal aku harap website buatanku ini semua bisa mengenang sejauh mana aku berjalan yaa, aku masih banyak cuma aku kirim 1 per 1 biar kamu gak bosen hehe semangat yaa...
             </p>
             <div class="signature">— Sent with love</div>
           </div>
+
         </div>
 
       </div>

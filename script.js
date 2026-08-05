@@ -72,3 +72,25 @@ function playAudio(url, btn) {
     btn.innerText = '▶';
   };
 }
+
+// ATUR PASSWORD DI SINI (Ganti '1234' sesuai keinginanmu)
+const SECRET_PASSWORD = "1234";
+
+function checkPassword() {
+  const inputVal = document.getElementById('passInput').value;
+  const errorMsg = document.getElementById('pwError');
+  
+  if (inputVal === SECRET_PASSWORD) {
+    // Password benar -> Sembunyikan form lock, tampilkan surat + confetti!
+    document.getElementById('surat-locked').classList.add('hidden-step');
+    document.getElementById('surat-content').classList.remove('hidden-step');
+    
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 40, spread: 50, origin: { y: 0.6 } });
+    }
+  } else {
+    // Password salah
+    errorMsg.innerText = "Password salah, coba lagi! 😜";
+    document.getElementById('passInput').value = "";
+  }
+}
