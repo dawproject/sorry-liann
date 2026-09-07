@@ -1,130 +1,611 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hallo Liann! ✨</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
-  <!-- Google Fonts -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>For Lian - Sorry For All..</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Canvas Confetti -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <!-- PASTIKAN FILE STYLE.CSS SATU FOLDER DENGAN INDEX.HTML -->
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            rose: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+            },
+            warm: {
+              bg: '#fdf8f5',
+              card: 'rgba(255, 255, 255, 0.65)',
+              border: 'rgba(255, 255, 255, 0.8)',
+              accent: '#9e4b5e',
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s infinite',
+            'spin-slow': 'spin 12s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(3deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles for Petals & Glassmorphism -->
+  <style>
+    body {
+      background: linear-gradient(135deg, #fff5f5 0%, #fed7aa 35%, #fecdd3 70%, #ffe4e6 100%);
+      background-attachment: fixed;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 30px -5px rgba(225, 112, 128, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    .glass-btn {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 15px rgba(244, 63, 94, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(244, 63, 94, 0.22);
+    }
+
+    /* Falling Petals Canvas Simulation Container */
+    #petals-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      background: linear-gradient(135deg, #fbcfe8, #fda4af);
+      border-radius: 150% 0 150% 0;
+      opacity: 0.7;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 0.8;
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+      }
+    }
+
+    /* Envelope Animation */
+    .envelope-wrapper {
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      height: 240px;
+      background: #fecdd3;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(225, 112, 128, 0.2);
+      cursor: pointer;
+      transition: transform 0.6s ease;
+      transform-style: preserve-3d;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 190px solid transparent;
+      border-right: 190px solid transparent;
+      border-top: 130px solid #fda4af;
+      transform-origin: top;
+      transition: transform 0.5s ease 0.2s, z-index 0.2s;
+      z-index: 4;
+      border-radius: 8px;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(253, 248, 245, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #fda4af;
+      border-radius: 10px;
+    }
+  </style>
 </head>
-<body>
+<body class="text-slate-800 antialiased relative min-h-screen pb-20">
 
-  <!-- Background Pattern -->
-  <div class="grid-bg"></div>
+  <div id="petals-container"></div>
 
-  <!-- Stickers Background -->
-  <div class="sticker sticker-smiley">😊</div>
-  <div class="sticker sticker-star">⭐</div>
-  <div class="sticker sticker-sparkle">🌸</div>
-  <div class="sticker sticker-heart-bubble">💬❤️</div>
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 space-y-12">
 
-  <div class="main-container">
-
-    <!-- TAMPILAN 1: POPUP GREETING AWAL -->
-    <div id="step1" class="retro-window">
-      <div class="window-header">
-        <button class="close-btn" onclick="nextStep(2)">✕</button>
-      </div>
-      <div class="window-content">
-        <div class="gif-container">
-          <img src="https://dekatutorial.github.io/v/stkr/Stiker%2016.gif">
+    <!-- AUDIO PLAYER FLOATING CARD -->
+    <header class="glass-card rounded-2xl p-4 flex items-center justify-between shadow-lg border border-white/80 transition-all hover:shadow-rose-200/50">
+      <div class="flex items-center space-x-3">
+        <div id="music-disc" class="w-11 h-11 rounded-full bg-gradient-to-tr from-rose-400 to-amber-200 flex items-center justify-center shadow-md">
+          <i data-lucide="music" class="w-5 h-5 text-white"></i>
         </div>
-        <h2 class="title-text">Hallo Liannn...</h2>
-        <button class="btn-primary" onclick="nextStep(2)">OK</button>
-      </div>
-    </div>
-
-    <!-- TAMPILAN 2: AMPLOP SURAT (Awalnya tersembunyi) -->
-    <div id="step2" class="envelope-scene hidden-step">
-      <div class="speech-bubble">
-        <span>Hai, ada surat buat kamu nich</span>
-      </div>
-      <div class="envelope-card" onclick="nextStep(3)">
-        <span class="env-icon">✉️</span>
-      </div>
-    </div>
-
-    <!-- TAMPILAN 3: SURAT INTERAKTIF (Awalnya tersembunyi) -->
-    <div id="step3" class="retro-window hidden-step">
-      <div class="window-header">
-        <span class="window-tag">Jangan lupa streak for today🔥</span>
-        <button class="close-btn" onclick="nextStep(1)">✕</button>
-      </div>
-      <div class="window-content">
-        
-        <!-- Tabs Menu -->
-        <div class="tab-menu">
-          <button class="tab-btn active" onclick="switchTab('pesan', this)">Pesan</button>
-          <button class="tab-btn" onclick="switchTab('lagu', this)">Lagu</button>
-          <button class="tab-btn" onclick="switchTab('surat', this)">Surat</button>
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-rose-500">Musik Biar Asikk</h4>
+          <p id="song-title" class="text-sm font-medium text-slate-700">About You - The 1975</p>
         </div>
+      </div>
+      <button id="play-btn" onclick="toggleAudio()" class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center hover:bg-rose-600 active:scale-95 transition-all shadow-md">
+        <i id="play-icon" data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i>
+      </button>
+      <!-- HTML5 Audio Element with Royalty-Free Romantic Melody Baseline -->
+      <audio id="bg-audio" loop preload="auto">
+        <source src="./1.mp3" type="audio/mpeg">
+      </audio>
+    </header>
 
-        <!-- TAB 1: PESAN -->
-        <div id="tab-pesan" class="tab-panel active">
-          <div class="paper-card">
-            <span class="paper-tag">~ Adam WInatra ~</span>
-            <p id="quoteText" class="quote-body">
-              "Maaf yaa buat hal yang tadi masalah kecil aku permasalhkan, aku gak pantes bilang kayak gitu ke kamu tadi, jadii aku buatin permohonan maaf ku lewat website karna ini spesiall buat kamu eaa.."
-            </p>
-            <button class="btn-secondary" onclick="randomQuote()">Acak Pesan Lagi 🎲</button>
-          </div>
-        </div>
+    <!-- HERO SECTION -->
+    <section class="text-center space-y-4 pt-4">
+      <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-rose-200 text-rose-600 text-xs font-medium shadow-sm animate-pulse-slow">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        <span>Sebuah Pesan Tulus Dari Aku Sendiri</span>
+      </div>
+      
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 leading-tight tracking-tight">
+        For Lian Safitri,<br>
+        <span class="italic font-normal text-rose-600">Someone special to me...</span>
+      </h1>
+      
+      <p class="text-sm md:text-base text-slate-600 max-w-md mx-auto leading-relaxed">
+        Tulisan ini aku rangkai khusus untukmu. Tolong baca dengan perlahan ya, karena setiap kalimat di dalamnya adalah penyesalan aku dari kemarin dan aku buat website ini karna khusus buat mu.
+      </p>
 
-        <!-- TAB 2: LAGU -->
-        <div id="tab-lagu" class="tab-panel">
-          <div class="song-box">
-            <div class="song-row">
-              <div>
-                <h4>About You</h4>
-                <small>The 1975</small>
-              </div>
-              <button class="play-btn" onclick="playAudio('./1.mp3', this)">▶</button>
+      <div class="pt-2 flex justify-center">
+        <a href="#timeline" class="inline-flex items-center text-xs font-semibold text-rose-500 hover:text-rose-700 transition-colors">
+          <span>Scroll ke bawah perlahan</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 ml-1 animate-bounce"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE PROMISE TIMELINE -->
+    <section id="timeline" class="space-y-6 pt-6">
+      <div class="text-center space-y-1">
+        <h2 class="font-serif text-xl md:text-2xl font-bold text-slate-800">Ungkapan Hati & Penyesalanku</h2>
+        <p class="text-xs text-slate-500">Tiga hal yang pengen aku sampaikan setelah semuanya tadi</p>
+      </div>
+
+      <div class="space-y-4 relative">
+        <!-- Connecting Vertical Line -->
+        <div class="absolute left-6 top-8 bottom-8 w-0.5 bg-rose-200/80 -z-0"></div>
+
+        <!-- STEP 1 -->
+        <div class="glass-card rounded-2xl p-5 relative z-10 transition-all hover:translate-y-[-2px]">
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 font-bold border border-rose-200 shadow-sm">
+              01
             </div>
-            <div class="song-row">
-              <div>
-                <h4>Risk It All</h4>
-                <small>Bruno Mars</small>
-              </div>
-              <button class="play-btn" onclick="playAudio('./2.mp3', this)">▶</button>
+            <div class="space-y-1.5 flex-1">
+              <h3 class="font-serif text-lg font-semibold text-slate-800 flex items-center justify-between">
+                <span>Penyesalan & Pengakuan Kesalahanku</span>
+                <i data-lucide="frown" class="w-4 h-4 text-rose-400"></i>
+              </h3>
+              <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                Lian, aku sadar kalo aku udah ngulangin kesalahan yang sama dan bikin kamu kecewa lagi. aku bener" minta maaf yaa... aku terlalu kebawa sama pikiran aku sendiri dan terlalu mempermasalahkan hal" kecil. jujur aku nyesel banget kalo sikap aku sampe bikin kamu ga nyaman.
+              </p>
             </div>
           </div>
         </div>
 
-        <!-- TAB 3: SURAT -->
-        <div id="tab-surat" class="tab-panel">
+        <!-- STEP 2 -->
+        <div class="glass-card rounded-2xl p-5 relative z-10 transition-all hover:translate-y-[-2px]">
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 font-bold border border-rose-200 shadow-sm">
+              02
+            </div>
+            <div class="space-y-1.5 flex-1">
+              <h3 class="font-serif text-lg font-semibold text-slate-800 flex items-center justify-between">
+                <span>Tentang Berharganya Kamu Buat Aku</span>
+                <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500"></i>
+              </h3>
+              <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                Kamu itu salah satu orang yang paling bikin aku nyaman buat cerita apa aja, dari hal penting sampe hal" random yang ga jelas wkwk. mungkin karna aku terlalu nyaman, makannya hal kecil aja kadang bisa bikin aku kepikiran. tapi aku ga mau rasa nyaman aku malah jadi beban buat kamu.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="glass-card rounded-2xl p-5 relative z-10 transition-all hover:translate-y-[-2px]">
+          <div class="flex items-start space-x-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0 font-bold border border-rose-200 shadow-sm">
+              03
+            </div>
+            <div class="space-y-1.5 flex-1">
+              <h3 class="font-serif text-lg font-semibold text-slate-800 flex items-center justify-between">
+                <span>Apa yang Mau Aku Perbaiki</span>
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+              </h3>
+              <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                Aku sadar minta maaf doang ga cukup kalo aku masih ngelakuin hal yang sama. jadi aku mau belajar buat lebih ngerti kamu, lebih bisa nahan pikiran aku sendiri, dan ga langsung mempermasalahkan hal" kecil. aku ga janji bakal langsung sempurna, tapi aku bakal berusaha buat jadi lebih baik.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI INTERACTION: REASONS WHY I HOLD ON -->
+    <section class="glass-card rounded-3xl p-6 space-y-5 text-center border border-white">
+      <div class="space-y-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-500">Kenapa Aku Berusaha?</span>
+        <h2 class="font-serif text-xl font-bold text-slate-800">Alasan Aku Selalu Memperbaiki lagi Buatmu</h2>
+      </div>
+
+      <p class="text-xs text-slate-500">Klik tombol-tombol manis di bawah ini untuk membuka pesanku satu per satu:</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+        <button onclick="showReason(1)" class="glass-btn rounded-xl p-3 text-xs font-semibold text-rose-700 flex items-center justify-center space-x-2">
+          <i data-lucide="gift" class="w-4 h-4 text-rose-500"></i>
+          <span>Alasan Ke-1</span>
+        </button>
+        <button onclick="showReason(2)" class="glass-btn rounded-xl p-3 text-xs font-semibold text-rose-700 flex items-center justify-center space-x-2">
+          <i data-lucide="smile" class="w-4 h-4 text-rose-500"></i>
+          <span>Alasan Ke-2</span>
+        </button>
+        <button onclick="showReason(3)" class="glass-btn rounded-xl p-3 text-xs font-semibold text-rose-700 flex items-center justify-center space-x-2">
+          <i data-lucide="sun" class="w-4 h-4 text-rose-500"></i>
+          <span>Alasan Ke-3</span>
+        </button>
+      </div>
+
+      <!-- Pop-up Dynamic Box -->
+      <div id="reason-box" class="hidden transition-all duration-300 p-4 rounded-2xl bg-rose-50/80 border border-rose-200 text-left">
+        <div class="flex items-start justify-between">
+          <h4 id="reason-title" class="font-serif font-bold text-rose-800 text-sm"></h4>
+          <button onclick="hideReason()" class="text-slate-400 hover:text-slate-600">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <p id="reason-desc" class="text-xs md:text-sm text-slate-600 mt-2 leading-relaxed"></p>
+      </div>
+    </section>
+
+    <!-- DIGITAL ENVELOPE & LOCKED LETTER SECTION -->
+    <section class="space-y-6 pt-4 text-center">
+      <div class="space-y-1">
+        <h2 class="font-serif text-2xl font-bold text-slate-800">Surat Rahasia Untuk Lian ✉️</h2>
+        <p class="text-xs text-slate-500">Ada pesan khusus yang terkunci rapat di dalam amplop ini</p>
+      </div>
+
+      <!-- Envelope Visual Display -->
+      <div class="envelope-wrapper flex justify-center py-4">
+        <div id="envelope-element" class="envelope flex flex-col items-center justify-center text-rose-800 p-6">
+          <div class="envelope-flap"></div>
+          <div class="z-10 text-center space-y-2">
+            <div class="w-12 h-12 rounded-full bg-white/80 mx-auto flex items-center justify-center shadow-md">
+              <i data-lucide="lock" class="w-6 h-6 text-rose-500"></i>
+            </div>
+            <p class="font-serif font-bold text-sm">Khusus : Lian</p>
+            <span class="text-[10px] bg-white/60 px-2 py-0.5 rounded-full text-rose-700">Terkunci Kata Sandi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Password Lock Card -->
+      <div id="password-card" class="glass-card rounded-2xl p-6 max-w-sm mx-auto space-y-4 shadow-lg">
+        <div class="text-center space-y-1">
+          <h3 class="font-semibold text-sm text-slate-700">Masukkan Password Pembuka</h3>
+          <p class="text-[11px] text-rose-500 italic">Petunjuk: (Apayah <span class="font-mono bg-rose-100 px-1 rounded">chat aja bos🤭</span>)</p>
+        </div>
+
+        <div class="space-y-2">
+          <input type="password" id="pass-input" placeholder="Ketik kata sandi di sini..." class="w-full px-4 py-2.5 rounded-xl border border-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white/80 text-sm text-center tracking-wider">
+          <button onclick="unlockLetter()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs font-bold shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center justify-center space-x-1.5">
+            <i data-lucide="key-round" class="w-4 h-4"></i>
+            <span>Buka Amplop & Surat 🔓</span>
+          </button>
+        </div>
+        <p id="pw-error" class="text-xs text-rose-600 font-medium hidden">Sandi salah sedikit manis, coba ingat-ingat lagi ya 🥺</p>
+      </div>
+
+      <!-- UNLOCKED LETTER CONTENT (HIDDEN BY DEFAULT) -->
+      <div id="unlocked-letter" class="hidden glass-card rounded-3xl p-6 md:p-8 text-left space-y-6 shadow-xl border border-white animate-fadeIn">
+        <div class="border-b border-rose-200/80 pb-4 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] uppercase tracking-wider font-bold text-rose-500">Surat Tulus Ungkapan Hati</span>
+            <h3 class="font-serif text-xl font-bold text-slate-800">Maafkan Aku Ya, Lian... 🌸</h3>
+          </div>
+          <i data-lucide="heart-handshake" class="w-8 h-8 text-rose-400"></i>
+        </div>
+
+        <div class="space-y-4 text-xs md:text-sm text-slate-700 leading-relaxed font-sans">
+          <p>
+            Hai Liannn, Kimpul guwehh...
+          </p>
+
+          <p>
+            Btw maaf yaa kalo ada salah kata dari teks ini, jadi pas kamu baca tulisan ini, aku cuma mau bilang sekali lagi kalau aku bener-bener minta maaf yaa. Setelah aku pikirin lagi dari semuanya yang tadi, aku sadar ternyata aku terlalu kebawa sama pikiranku sendiri, terlalu mempermasalahkan hal kecil yang sebenernya ga perlu sampai akhirnya malah bikin kamu ikut kepikiran juga.
+          </p>
+
+          <p>
+            Aku sadar setiap orang itu punya kesibukan, kebiasaan dan cara masing" yang beda. Jadi harusnya aku bisa lebih ngerti keadaan kamu tanpa harus berharap kamu selalu merespon atau bersikap sesuai sama apa yang ada di kepala aku. Kamu yaa kamu, Lian... aku ga mau kamu ngerasa harus berubah cuma karna aku.
+          </p>
+
+          <p>
+            Mungkin aku emang terlalu nyaman sama kamu, makannya kadang hal kecil aja bisa masuk ke pikiran aku dan jadi kepikiran macem". Padahal belum tentu maksud kamu seperti yang aku pikirin. Jadi maafin aku yaa kalau selama ini aku sering bikin sesuatu yang kecil jadi keliatan besar, atau tanpa sadar malah bikin kamu ngerasa terbebani sama aku.
+          </p>
+
+          <p>
+            Aku masih suka ngobrol sama kamu, masih suka cerita random, masih suka ngirim hal" ga jelas, masih suka ketawa sendiri gara" sesuatu yang menurutku lucu wkwk. Aku cuma mau belajar buat lebih ngerti batasnya, supaya rasa nyaman aku sama kamu ga berubah jadi sesuatu yang bikin kamu capek.
+          </p>
+
+          <p>
+            Dan makasih yaa Lian, kamu udah mau jujur dan ngejelasin semuanya ke aku. Jujur aku lebih suka kamu bilang langsung kaya gini daripada kamu pendem sendiri. Dari situ aku juga bisa belajar buat lebih ngerti kamu, dan semoga kedepannya kita bisa lebih saling memahami tanpa harus ada salah paham lagi.
+          </p>
+          <p class="font-medium text-slate-800">
+            Terima kasih ya sudah bertahan sejauh ini sama aku. I really treasure you more than words can ever explain.
+          </p>
+        </div>
+
+        <div class="pt-2 flex justify-between items-end border-t border-rose-200/80">
+          <span class="text-[11px] text-slate-400 italic">Dibuat sama hacker tkj (katanya gais)</span>
+          <div class="text-right">
+            <span class="text-xs font-serif italic text-rose-600 font-bold block">Dari Pangeran,</span>
+            <span class="text-xs font-semibold text-slate-700">Adam Winatra</span>
+          </div>
+        </div>
+
+        <!-- RESPONSE FORGIVENESS BUTTONS -->
+        <div id="forgiveness-section" class="pt-6 border-t border-rose-200/60 text-center space-y-4">
+          <p class="font-serif font-bold text-slate-800 text-sm md:text-base">Gimana Lian??... Maafin Aku Ya? ☹</p>
           
-          <!-- TAMPILAN TERKUNCI (PASSWORD) -->
-          <div id="surat-locked" class="paper-card">
-            <span class="paper-tag">🔒 SURAT TERKUNCI</span>
-            <p style="font-size: 0.8rem; margin-bottom: 12px; color: #5c301c;">Masukkan password untuk membuka surat ini:</p>
-            
-            <input type="password" id="passInput" placeholder="Password..." class="pw-input">
-            <button class="btn-secondary" onclick="checkPassword()">Buka Surat 🔓</button>
-            <p id="pwError" class="error-msg"></p>
-          </div>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <button onclick="forgiveResponse('full')" class="py-3 px-6 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-xs shadow-lg hover:shadow-rose-300 hover:scale-105 active:scale-95 transition-all flex items-center justify-center space-x-2">
+              <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+              <span>Sudah Maafin Kok</span>
+            </button>
 
-          <!-- TAMPILAN SURAT (AWALNYA HIDDEN) -->
-          <div id="surat-content" class="paper-card text-left hidden-step">
-            <p>
-              Pesan dari aku : Aku buatin web ini satset pagi ini karena aku mau minta maaf ke kamu yaa, maaf kalau suka bikin kecewa, maaf kalo suka maksain, maaf kalau suka bikin kamu badmood, maaf yaa.. aku emang kesannya bersalah entah kenapa aku juga gamau kehilangan manusia tengil kali ini apalagi kamu harapan terakhir cuma karna sikapku tolong jangan ngilang yaa, aku bisa berubah kok, kalo gak suka sama sifatku atau kamu cape bilang aja ya, lebih baik ngomong duluan daripada telat, kalopun nantinya kita udah jadi orang yang cukup saling kenal aku harap website buatanku ini semua bisa mengenang sejauh mana aku berjalan yaa, aku masih banyak cuma aku kirim 1 per 1 biar kamu gak bosen hehe semangat yaa...
-            </p>
-            <div class="signature">— Sent with love</div>
+            <button onclick="forgiveResponse('tease')" class="py-3 px-6 rounded-2xl bg-white text-rose-600 border border-rose-300 font-bold text-xs shadow-md hover:bg-rose-50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center space-x-2">
+              <i data-lucide="smile-plus" class="w-4 h-4"></i>
+              <span>Masih Kesel Tapi Nyebelin</span>
+            </button>
           </div>
+        </div>
 
+        <!-- RESPONSE MESSAGE RESULT BOX -->
+        <div id="response-result" class="hidden p-5 rounded-2xl bg-rose-100/90 border border-rose-300 text-center space-y-2 animate-bounce">
+          <h4 id="response-title" class="font-serif font-bold text-rose-800 text-base"></h4>
+          <p id="response-body" class="text-xs md:text-sm text-slate-700"></p>
         </div>
 
       </div>
-    </div>
+    </section>
 
-  </div>
+    <!-- FOOTER -->
+    <footer class="text-center pt-8 text-xs text-slate-500 space-y-1">
+      <p>Made specially for <strong>Lian</strong> with endless love 🤍</p>
+      <p class="text-[10px] text-slate-400">© 2026 - Always & Forever</p>
+    </footer>
 
-  <script src="script.js"></script>
+  </main>
+
+  <!-- JAVASCRIPT LOGIC & INTERACTIONS -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. FLOATING PETALS GENERATOR
+    function createPetals() {
+      const container = document.getElementById('petals-container');
+      const petalCount = 18;
+
+      for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        
+        // Randomize size, position and duration
+        const size = Math.random() * 12 + 10;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size * 1.4}px`;
+        petal.style.left = `${Math.random() * 100}%`;
+        petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
+        petal.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(petal);
+      }
+    }
+    createPetals();
+
+    // 2. AUDIO PLAYER LOGIC
+    const audio = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const musicDisc = document.getElementById('music-disc');
+    let isPlaying = false;
+
+    function toggleAudio() {
+      if (isPlaying) {
+        audio.pause();
+        playIcon.setAttribute('data-lucide', 'play');
+        musicDisc.classList.remove('animate-spin-slow');
+      } else {
+        audio.play().then(() => {
+          playIcon.setAttribute('data-lucide', 'pause');
+          musicDisc.classList.add('animate-spin-slow');
+        }).catch(err => {
+          console.log("Audio auto-play restricted by browser", err);
+        });
+      }
+      isPlaying = !isPlaying;
+      lucide.createIcons();
+    }
+
+    // Autoplay background music upon first tap anywhere on screen
+    document.body.addEventListener('click', function initialPlay() {
+      if (!isPlaying) {
+        toggleAudio();
+      }
+      document.body.removeEventListener('click', initialPlay);
+    }, { once: true });
+
+    // 3. REASONS POPUP LOGIC
+    const reasonsData = {
+      1: {
+        title: "Alasan Ke-1: Aku Suka Hal' Kecil Dari Kamu",
+        desc: "Aku suka hal kecil yang kamu lakuin, bahkan kadang hal yang menurut kamu biasa aja bisa bikin aku seneng. mungkin itu juga yang bikin aku terlalu nyaman sama kamu, karna aku emang suka cara kamu jadi diri kamu sendiri."
+      },
+      2: {
+        title: "Alasan Ke-2: Aku Suka Cerita Sama Kamu",
+        desc: "Sama kamu aku bisa cerita apa aja, because i don't know perempuan selain ibuku yg bisa aku ajak sharing, mulai dari hal penting sampe hal random yang ga jelas wkwk. aku ga tau sejak kapan bisa senyaman ini, tapi yang jelas aku seneng bisa punya seseorang yang bisa aku ajak cerita tanpa harus mikirin harus ngomong apa."
+      },
+      3: {
+        title: "Alasan Ke-3: Janji Untuk Tumbuh Bersama ",
+        desc: "Aku juga mau memperbaiki kekurangan dan kesalahanku karena aku tahu kita masih banyak salah paham. dan gak mau bikin kamu ngetik long text lagi.."
+      }
+    };
+
+    function showReason(id) {
+      const box = document.getElementById('reason-box');
+      const title = document.getElementById('reason-title');
+      const desc = document.getElementById('reason-desc');
+
+      title.innerText = reasonsData[id].title;
+      desc.innerText = reasonsData[id].desc;
+
+      box.classList.remove('hidden');
+    }
+
+    function hideReason() {
+      document.getElementById('reason-box').classList.add('hidden');
+    }
+
+    // 4. UNLOCK LETTER & CONFETTI EFEK
+    const SECRET_PASSWORD = "kimpul";
+
+    function unlockLetter() {
+      const inputVal = document.getElementById('pass-input').value.trim();
+      const pwError = document.getElementById('pw-error');
+      const envelope = document.getElementById('envelope-element');
+      const passCard = document.getElementById('password-card');
+      const letter = document.getElementById('unlocked-letter');
+
+      if (inputVal.toLowerCase() === SECRET_PASSWORD) {
+        pwError.classList.add('hidden');
+        envelope.classList.add('open');
+
+        // Confetti celebration launch
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#f43f5e', '#fda4af', '#fecdd3', '#ffffff']
+        });
+
+        setTimeout(() => {
+          passCard.classList.add('hidden');
+          letter.classList.remove('hidden');
+          letter.scrollIntoView({ behavior: 'smooth' });
+        }, 600);
+
+      } else {
+        pwError.classList.remove('hidden');
+        document.getElementById('pass-input').value = '';
+      }
+    }
+
+    // Allow press Enter to unlock
+    document.getElementById('pass-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        unlockLetter();
+      }
+    });
+
+    // 5. FORGIVENESS BUTTON RESPONSE LOGIC
+    function forgiveResponse(type) {
+      const resultBox = document.getElementById('response-result');
+      const resultTitle = document.getElementById('response-title');
+      const resultBody = document.getElementById('response-body');
+
+      if (type === 'full') {
+        resultTitle.innerText = "Makasih Banyak KIMPULLL 😝";
+        resultBody.innerText = "Aku janji bakal jaga perasaanmu baik-baik dan nggak akan sia-siain kesempatan ini. btw aku emang lagi berusaha buat yang terbaik di kamu apapun itu aku cuma takut kita miskom salah paham dan apapun itu i always love u 🤭!";
+      } else {
+        resultTitle.innerText = "Maaf yaa kalo masih kesel";
+        resultBody.innerText = "Wajar kok kalau masih kesel, yang penting aku minta maaf sepenuh hati sampe buat website untuk namamu. Aku bakal usahain terus yang terbaik buatmu kali ini karna kamu tujuanku eaa!";
+      }
+
+      resultBox.classList.remove('hidden');
+
+      // Heart confetti explosion
+      confetti({
+        particleCount: 120,
+        spread: 90,
+        origin: { y: 0.7 }
+      });
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
