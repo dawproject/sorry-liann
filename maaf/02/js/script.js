@@ -14,7 +14,7 @@ async function narr(){
   for(const x of t){if(my!==tok)return;const p=document.createElement('p');p.className='ln';p.innerHTML=x;box.appendChild(p);await wait(2300)}
   if(my===tok)$('#b1').classList.remove('hide');
 }
-const conv=[["m","Maaf kalau selama ini aku terkadang terlalu fokus sama perasaanku sendiri."],["l","Maaf juga kalau aku masih sering kurang peka sama keadaan kamu."],["m","Aku juga sadar kalau aku punya banyak kekurangan. Aku nggak selalu bisa menyampaikan sesuatu dengan cara yang tepat."],["l","Aku tahu kita sama-sama masih belajar memahami satu sama lain."],["m","Aku nggak pernah menganggap kamu sebagai beban, Lian. Aku cuma ingin kita sama-sama punya kemauan untuk belajar."],["l","Aku juga nggak mau kamu terus merasa harus mengalah atau mengubah dirimu sendiri hanya karena menghadapi aku."],["m","Karena bukan cuma kamu yang perlu belajar menjadi lebih baik. Aku juga."],["l","Aku ingin kita bisa saling menghargai, bukan hanya ketika semuanya baik-baik saja."],["m","Kalau suatu saat kita melakukan kesalahan lagi, semoga kita bisa membicarakannya baik-baik."],["l","Tanpa harus terus mencari siapa yang paling salah."],["m","Karena pada akhirnya, kita berdua punya kekurangan dan kita berdua punya perasaan yang perlu dijaga."],["l","Let's learn to grow together."]];
+const conv=[["m","Maaf kalau selama ini aku terkadang terlalu fokus sama perasaanku sendiri."],["l","Maaf juga kalau aku masih sering kurang peka sama keadaan kamu."],["m","Aku juga sadar kalau aku punya banyak kekurangan. Aku nggak selalu bisa menyampaikan sesuatu dengan cara yang tepat."],["l","Aku tahu kita sama-sama masih belajar memahami satu sama lain."],["m","Aku nggak pernah menganggap kamu sebagai beban, Lian. Aku cuma ingin kita sama-sama punya kemauan untuk belajar."],["l","Aku juga nggak mau kamu terus merasa harus mengalah atau mengubah dirimu sendiri hanya karena menghadapi aku."],["m","Karena bukan cuma kamu yang perlu belajar menjadi lebih baik. Aku juga."],["l","Aku ingin kita bisa saling menghargai, bukan hanya ketika semuanya baik-baik saja."],["m","Kalau suatu saat kita melakukan kesalahan lagi, semoga kita bisa membicarakannya baik-baik."],["l","Tanpa harus terus mencari siapa yang paling salah."],["m","Karena pada akhirnya, kita berdua punya kekurangan dan kita berdua punya perasaan yang perlu dijaga."],["l","Ayo kita belajar tumbuh bersama."]];
 async function chat(){
   const c=$('#chat'),my=tok;c.innerHTML='';$('#b2').classList.add('hide');
   let h=19,m=4;
@@ -33,7 +33,7 @@ async function chat(){
 $$('.card').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
 async function flower(){
   const f=$('#fl'),my=tok,cap=$('#cap');f.className.baseVal='';$('#b5').classList.add('hide');
-  const cs=["Every beautiful thing starts somewhere.","Forgiveness gives us a place to begin.","Respect and understanding help us grow.","Something beautiful grows when we both care."];
+  const cs=["Setiap hal indah selalu bermula dari suatu tempat.","Memaafkan memberi kita tempat untuk memulai.","Saling menghormati dan memahami membuat kita tumbuh.","Sesuatu yang indah tumbuh ketika kita sama-sama peduli."];
   cap.textContent=cs[0];
   for(let i=1;i<4;i++){
     await wait(3200);if(my!==tok)return;
@@ -67,14 +67,9 @@ $('#grow').onclick=()=>{
   setTimeout(()=>$('#thx').classList.remove('hide'),1800);
   $('#thx').style.animation='fi 2s ease both';
 };
-/* music: optional, user-triggered, soft generated tones (no autoplay) */
-let ac,on=false,g,tm;
+/* MUSIK: file sendiri di maaf/02/assets/musik.mp3 — hanya diputar saat tombol 🌿 diketuk (tidak autoplay) */
+const bgm=document.getElementById('bgm');
 $('#mus').onclick=()=>{
-  try{
-    if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();g=ac.createGain();g.gain.value=.06;g.connect(ac.destination)}
-    on=!on;$('#mus').textContent=on?'🔊':'🌿';
-    clearInterval(tm);if(!on){g.gain.value=0;return}
-    g.gain.value=.06;const n=[261.6,329.6,392,440,392,329.6];let i=0;
-    tm=setInterval(()=>{const t=ac.currentTime,os=ac.createOscillator(),e=ac.createGain();os.type='sine';os.frequency.value=n[i++%n.length];e.gain.setValueAtTime(0,t);e.gain.linearRampToValueAtTime(1,t+.4);e.gain.linearRampToValueAtTime(0,t+2.4);os.connect(e);e.connect(g);os.start(t);os.stop(t+2.5)},1800);
-  }catch(e){}
+  if(bgm.paused){bgm.volume=.5;bgm.play().then(()=>$('#mus').textContent='🔊').catch(()=>{})}
+  else{bgm.pause();$('#mus').textContent='🌿'}
 };

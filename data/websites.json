@@ -1,6 +1,6 @@
 [
-  {"id":"01","title":"A Letter of Apology","description":"Sebuah ungkapan penyesalan, pengakuan kesalahan, dan surat tulus untuk seseorang yang berarti.","date":"","url":"/maaf/01/","thumbnail":"/assets/thumbnails/01.svg","emoji":"💌","status":"available"},
-  {"id":"02","title":"Between Us, We Grow 🌷","description":"Sebuah perjalanan tentang dua orang yang sama-sama belajar memaafkan, menghargai, memahami, dan tumbuh bersama.","date":"2026-11-23","url":"/maaf/02/","thumbnail":"/assets/thumbnails/02.svg","emoji":"🌷","status":"available"},
+  {"id":"01","title":"A Letter of Apology","description":"Sebuah ungkapan penyesalan, pengakuan kesalahan, dan surat tulus untuk seseorang yang berarti.","date":"","url":"/maaf/01/","thumbnail":"/assets/thumbnails/01.svg","emoji":"💌","status":"SUDAH DIBUKA"},
+  {"id":"02","title":"Diantara kita, Kita tumbuh bersama 🌷","description":"Sebuah perjalanan tentang dua orang yang sama-sama belajar memaafkan, menghargai, memahami, dan tumbuh bersama.","date":"2026-11-23","url":"/maaf/02/","thumbnail":"/assets/thumbnails/02.svg","emoji":"🌷","status":"TERBARU"},
   {"id":"03","title":"Future Story","description":"Sebuah cerita baru yang masih disiapkan dengan sabar.","date":"","url":"/maaf/03/","thumbnail":"","emoji":"🌱","status":"coming-soon"},
   {"id":"04","title":"Future Story","description":"Sebuah cerita baru yang masih disiapkan dengan sabar.","date":"","url":"/maaf/04/","thumbnail":"","emoji":"🍃","status":"coming-soon"}
 ]
