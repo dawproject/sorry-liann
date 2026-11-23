@@ -67,9 +67,10 @@ $('#grow').onclick=()=>{
   setTimeout(()=>$('#thx').classList.remove('hide'),1800);
   $('#thx').style.animation='fi 2s ease both';
 };
-/* MUSIK: file sendiri di maaf/02/assets/musik.mp3 — hanya diputar saat tombol 🌿 diketuk (tidak autoplay) */
-const bgm=document.getElementById('bgm');
-$('#mus').onclick=()=>{
-  if(bgm.paused){bgm.volume=.5;bgm.play().then(()=>$('#mus').textContent='🔊').catch(()=>{})}
-  else{bgm.pause();$('#mus').textContent='🌿'}
-};
+/* MUSIK: file sendiri di maaf/02/assets/musik.mp3 — mulai otomatis di ketukan pertama di mana saja; tombol 🌿 untuk play/pause */
+const bgm=document.getElementById('bgm'),mb=$('#mus');
+const icon=()=>{mb.textContent=bgm.paused?'🌿':'🔊'};
+const startM=()=>{bgm.volume=.5;return bgm.play().then(icon).catch(e=>console.log('Musik gagal diputar:',e))};
+document.addEventListener('click',e=>{if(!e.target.closest('#mus')&&bgm.paused&&!bgm.dataset.off)startM()},{once:true});
+mb.onclick=()=>{if(bgm.paused){bgm.dataset.off='';startM()}else{bgm.dataset.off='1';bgm.pause();icon()}};
+bgm.addEventListener('error',()=>{mb.textContent='⚠️';mb.title='File musik tidak ditemukan (assets/musik.mp3)'});
