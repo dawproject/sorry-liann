@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Between Us, We Grow</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<button id="mus" aria-label="Suara latar">🌿</button>
+<main>
+
+<section class="scr on" id="s0">
+ <div style="font-size:64px">🌱</div>
+ <h1>Between Us, We Grow</h1>
+ <p class="sub">A little journey about us, our mistakes, and everything we learn along the way.</p>
+ <p class="serif" style="font-size:1.25em;margin-top:26px">Somewhere between mistakes and forgiveness,<br>we learn to grow.</p>
+ <p class="sub">Not a perfect story, just two people learning to understand each other.</p>
+ <button class="btn" data-go="1">Begin Our Little Story</button>
+</section>
+
+<section class="scr" id="s1">
+ <h2>Two People, Many Feelings</h2>
+ <div id="nar" class="serif" style="color:var(--br);font-size:1.05em"></div>
+ <button class="btn hide" data-go="2" id="b1">Lanjut</button>
+</section>
+
+<section class="scr" id="s2" style="justify-content:flex-start">
+ <div class="top"><b class="serif" style="color:var(--rose)">Our Little Conversation</b><div class="sub" style="font-size:12px">Me &amp; Lian</div></div>
+ <div id="chat"></div>
+ <button class="btn hide" data-go="3" id="b2">Lanjut</button>
+</section>
+
+<section class="scr" id="s3">
+ <h2>Forgiveness Doesn't Mean Forgetting.</h2>
+ <p>Memaafkan bukan berarti menganggap semua kesalahan tidak pernah terjadi.</p>
+ <p>Memaafkan adalah ketika kita mau memahami bahwa setiap orang bisa melakukan kesalahan.</p>
+ <p>Namun, kata maaf juga perlu disertai kesadaran.</p>
+ <p>Kita tidak harus terus-menerus menghukum diri sendiri atas kesalahan yang pernah dilakukan.</p>
+ <p>Kita juga tidak harus selalu mengalah demi menjaga sesuatu tetap baik-baik saja.</p>
+ <p>Yang terpenting adalah bagaimana kita sama-sama mau memperbaiki diri.</p>
+ <div class="cards">
+  <button class="card"><b>I'm Sorry</b>Tentang keberanian mengakui kesalahan.<div class="more">Mengakui kesalahan itu tidak mudah. Tapi dari situ, kita belajar bahwa menjadi kuat bukan berarti selalu benar.</div></button>
+  <button class="card"><b>I Forgive You</b>Tentang memberi ruang untuk memperbaiki diri.<div class="more">Memaafkan adalah memberi kesempatan, bukan melupakan. Kita percaya bahwa setiap orang bisa belajar menjadi lebih baik.</div></button>
+ </div>
+ <button class="btn" data-go="4">Lanjut</button>
+</section>
+
+<section class="scr" id="s4">
+ <h2>Not Just You. Not Just Me. Both of Us.</h2>
+ <div class="steps">
+  <div class="step" style="animation-delay:.2s"><em>01</em><i>🌿</i><b class="serif">Forgiveness</b><q>We learn to forgive without keeping score.</q>Kita belajar memaafkan tanpa menghitung siapa yang lebih banyak meminta maaf.</div>
+  <div class="step" style="animation-delay:.9s"><em>02</em><i>🌸</i><b class="serif">Appreciation</b><q>We learn to appreciate even the little things.</q>Kita belajar menghargai waktu, perkataan, perhatian, dan usaha satu sama lain.</div>
+  <div class="step" style="animation-delay:1.6s"><em>03</em><i>🍃</i><b class="serif">Understanding</b><q>We learn to listen, not just to respond.</q>Kita belajar memahami perasaan orang lain, bukan hanya ingin dimengerti.</div>
+  <div class="step" style="animation-delay:2.3s"><em>04</em><i>🌼</i><b class="serif">Patience</b><q>We give each other room to become better.</q>Kita memberikan ruang untuk bertumbuh tanpa menuntut kesempurnaan.</div>
+ </div>
+ <button class="btn" data-go="5">Lihat Bunganya Tumbuh</button>
+</section>
+
+<section class="scr" id="s5">
+ <h2>Something Grows Between Us</h2>
+ <svg id="fl" viewBox="0 0 200 230" aria-label="Dua benih tumbuh menjadi satu bunga">
+  <path d="M10 170 Q100 160 190 170 L190 230 L10 230Z" fill="#F5EBDD"/>
+  <path class="draw root" pathLength="200" d="M70 178 Q60 200 48 214 M70 178 Q76 200 82 218 M130 178 Q140 200 152 214 M130 178 Q124 200 118 218" stroke-width="2"/>
+  <path class="draw stem" pathLength="200" d="M70 172 Q70 110 100 98"/>
+  <path class="draw stem stem2" pathLength="200" d="M130 172 Q130 110 100 98"/>
+  <path class="draw stem" pathLength="200" d="M100 98 L100 70"/>
+  <ellipse class="lf" cx="62" cy="130" rx="14" ry="7" transform="rotate(-35 62 130)"/>
+  <ellipse class="lf" cx="138" cy="130" rx="14" ry="7" transform="rotate(35 138 130)"/>
+  <ellipse class="sd" cx="70" cy="174" rx="6" ry="4"/><ellipse class="sd" cx="130" cy="174" rx="6" ry="4" style="fill:#B97883"/>
+  <g class="bl"><g transform="translate(100 62)">
+   <ellipse class="pt" cx="0" cy="-20" rx="9" ry="16"/>
+   <ellipse class="pt" cx="0" cy="-20" rx="9" ry="16" transform="rotate(60)"/><ellipse class="pt" cx="0" cy="-20" rx="9" ry="16" transform="rotate(120)"/>
+   <ellipse class="pt" cx="0" cy="-20" rx="9" ry="16" transform="rotate(180)"/><ellipse class="pt" cx="0" cy="-20" rx="9" ry="16" transform="rotate(240)"/>
+   <ellipse class="pt" cx="0" cy="-20" rx="9" ry="16" transform="rotate(300)"/>
+   <circle r="8" fill="#F5C77E"/></g></g>
+ </svg>
+ <p class="cap" id="cap">Every beautiful thing starts somewhere.</p>
+ <button class="btn hide" data-go="6" id="b5">Lanjut</button>
+</section>
+
+<section class="scr" id="s6">
+ <h2>Little Garden of Us</h2>
+ <p class="sub">Ketuk setiap bunga.</p>
+ <div class="gd">
+  <button class="fw" data-m="Forgiveness — memaafkan tanpa menghitung, dan memberi ruang untuk memulai lagi."><span>🌷</span>Forgiveness</button>
+  <button class="fw" data-m="Respect — menjaga perkataan, menghargai waktu dan usaha kecil satu sama lain."><span>🌸</span>Respect</button>
+  <button class="fw" data-m="Understanding — mendengar bukan hanya untuk menjawab, tapi untuk mengerti."><span>🌼</span>Understanding</button>
+  <button class="fw" data-m="Patience — memberi ruang untuk bertumbuh tanpa menuntut kesempurnaan."><span>🌺</span>Patience</button>
+ </div>
+ <p id="gm">Setiap bunga punya maknanya sendiri.</p>
+ <button class="btn" data-go="7">Lanjut</button>
+</section>
+
+<section class="scr" id="s7">
+ <button class="env" id="env" aria-label="Buka surat">💌</button>
+ <p class="sub" id="envt">Ketuk untuk membuka surat</p>
+ <div class="paper" id="ltr">
+  <h2>To Lian,</h2>
+  <p>Aku nggak tahu apakah selama ini kita sudah benar-benar memahami satu sama lain.</p>
+  <p>Tapi aku tahu, kita sama-sama pernah melakukan kesalahan.</p>
+  <p>Ada saatnya aku kecewa, ada saatnya kamu kecewa. Ada saatnya aku merasa kurang dimengerti, dan mungkin kamu juga pernah merasakan hal yang sama.</p>
+  <p>Maaf untuk semua hal yang pernah aku lakukan, baik yang aku sadari maupun yang tanpa sengaja membuatmu kecewa.</p>
+  <p>Terima kasih juga karena masih mau memaafkan, mengingatkan, dan memberikan kesempatan untuk belajar.</p>
+  <p>Aku nggak ingin kamu merasa bahwa hanya kamu yang harus berubah. Aku juga punya banyak hal yang harus diperbaiki.</p>
+  <p>Aku ingin kita sama-sama belajar menghargai waktu, menjaga perkataan, memahami perasaan, dan tidak menganggap usaha kecil satu sama lain sebagai sesuatu yang biasa saja.</p>
+  <p>Aku nggak ingin kita sibuk menghitung siapa yang lebih banyak salah dan siapa yang lebih sering meminta maaf.</p>
+  <p>Karena kita berdua manusia biasa yang masih belajar.</p>
+  <p>Semoga setiap kesalahan bisa menjadi pelajaran, setiap maaf bisa menjadi awal yang lebih baik, dan setiap usaha kecil bisa membuat kita semakin memahami satu sama lain.</p>
+  <p>Aku tidak meminta kita menjadi sempurna.</p>
+  <p>Aku hanya berharap kita tidak berhenti belajar menjadi lebih baik.</p>
+  <p><b>Let's grow together, slowly.</b></p>
+  <p class="serif" style="color:var(--rose);text-align:right">With care, from me to you.</p>
+ </div>
+ <button class="btn hide" data-go="8" id="b7">Lanjut</button>
+</section>
+
+<section class="scr fin" id="s8">
+ <div style="font-size:88px" id="bigf">🌷</div>
+ <h1>Not perfect.<br>Not always right.<br>But always learning.</h1>
+ <p class="serif" style="font-size:1.15em">Some things are worth growing slowly.</p>
+ <button class="btn" id="grow">Let It Grow 🌷</button>
+ <p class="serif hide" id="thx" style="font-size:1.3em;color:var(--rose);margin-top:26px">Thank you for being part of this little journey, Lian.</p>
+</section>
+
+</main>
+<script src="js/script.js"></script>
+<script src="../../assets/shared/nav.js"></script>
+</body>
+</html>

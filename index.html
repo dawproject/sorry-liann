@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Little Archive</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+<style>
+:root{--iv:#FFF9F3;--cr:#F5EBDD;--pk:#DDAEB4;--rose:#B97883;--sage:#A6B49B;--br:#80695D}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{min-height:100svh;background:radial-gradient(circle at 50% 0,#fff,var(--iv) 40%,var(--cr));color:var(--br);font:clamp(15px,4vw,16px)/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+main{max-width:560px;margin:0 auto;padding:44px 20px 56px;position:relative;z-index:2}
+header{text-align:center;margin-bottom:28px}
+h1{font:400 clamp(32px,10vw,46px)/1.15 Georgia,serif;color:var(--rose);margin:.2em 0 .3em}
+header p{margin:0 auto;max-width:30ch;opacity:.9}
+.grid{display:grid;gap:18px}
+.card{background:#fff;border:1px solid var(--cr);border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(128,105,93,.1);opacity:0;animation:up .8s ease forwards;display:flex;flex-direction:column}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.th{height:130px;background:var(--cr) center/cover;display:flex;align-items:center;justify-content:center;font-size:54px}
+.cb{padding:16px 18px 18px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.st{padding:3px 10px;border-radius:999px;font-size:11px;background:var(--sage);color:#fff}
+.st.cs{background:var(--cr);color:var(--br)}
+.card h2{font:400 1.35em/1.25 Georgia,serif;color:var(--rose);margin:.5em 0 .25em}
+.card p{margin:0 0 .6em;font-size:.95em}
+.dt{font-size:12px;opacity:.7}
+.btn{display:block;width:100%;min-height:48px;margin-top:10px;padding:13px;border:0;border-radius:999px;background:var(--rose);color:#fff;font:inherit;text-align:center;text-decoration:none;cursor:pointer;box-shadow:0 5px 14px rgba(185,120,131,.3)}
+.btn.soft{background:transparent;color:var(--br);border:1.5px solid var(--pk);box-shadow:none}
+.card.cs .th{filter:grayscale(.4);opacity:.8}
+dialog{border:0;border-radius:22px;padding:26px 22px;max-width:min(88vw,380px);text-align:center;background:var(--iv);color:var(--br);box-shadow:0 20px 50px rgba(128,105,93,.3)}
+dialog::backdrop{background:rgba(128,105,93,.35);backdrop-filter:blur(3px)}
+dialog h3{font:400 1.4em Georgia,serif;color:var(--rose);margin:.2em 0}
+.pet{position:fixed;top:-30px;z-index:1;pointer-events:none;opacity:.7;animation:fall linear infinite}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(480deg)}}
+footer{text-align:center;margin-top:30px;font-size:12px;opacity:.7}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-delay:0s!important}}
+</style>
+</head>
+<body>
+<main>
+ <header>
+  <div style="font-size:44px">🌿</div>
+  <h1>Our Little Archive</h1>
+  <p>Every apology has a story. Every story has something to teach us.</p>
+ </header>
+ <div class="grid" id="grid"></div>
+ <footer>Made with care, for Lian.</footer>
+</main>
+<dialog id="dlg">
+ <div style="font-size:44px">🌱</div>
+ <h3>Coming Soon</h3>
+ <p id="dtx">Cerita ini masih tumbuh pelan-pelan. Beberapa hal memang layak ditunggu.</p>
+ <button class="btn" id="dcl">Mengerti</button>
+</dialog>
+<script>
+(async function(){
+  var g=document.getElementById('grid'),dlg=document.getElementById('dlg');
+  function fmt(d){if(!d)return'';var x=new Date(d+'T00:00:00');return isNaN(x)?'':x.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}
+  function esc(s){var e=document.createElement('div');e.textContent=s==null?'':s;return e.innerHTML}
+  var list=[];
+  try{list=await (await fetch('data/websites.json')).json()}catch(e){g.innerHTML='<p style="text-align:center">Data arsip belum bisa dimuat. Jalankan lewat server (bukan file://).</p>';return}
+  list.sort(function(a,b){return a.id>b.id?1:-1}).forEach(function(w,i){
+    var ok=w.status==='available',c=document.createElement('article');
+    c.className='card'+(ok?'':' cs');c.style.animationDelay=(i*.15)+'s';
+    var th=w.thumbnail?'style="background-image:url(\''+esc(w.thumbnail)+'\')"':'';
+    c.innerHTML='<div class="th" '+th+'>'+(w.thumbnail?'':esc(w.emoji||'🌱'))+'</div><div class="cb"><div class="top"><span>Web '+esc(w.id)+'</span><span class="st'+(ok?'':' cs')+'">'+(ok?'Available':'Coming Soon')+'</span></div><h2>'+esc(w.title)+'</h2><p>'+esc(w.description)+'</p>'+(fmt(w.date)?'<div class="dt">'+fmt(w.date)+'</div>':'')+(ok?'<a class="btn" href="'+esc(w.url)+'">Buka Cerita</a>':'<button class="btn soft" type="button">Coming Soon</button>')+'</div>';
+    if(!ok)c.querySelector('button').onclick=function(){dlg.showModal()};
+    g.appendChild(c);
+  });
+  document.getElementById('dcl').onclick=function(){dlg.close()};
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  for(var i=0;i<12;i++){var p=document.createElement('span');p.className='pet';p.textContent=['🌸','🌷','🍃'][i%3];p.style.left=Math.random()*100+'vw';p.style.fontSize=(13+Math.random()*10)+'px';p.style.setProperty('--dx',(Math.random()*100-50)+'px');p.style.animationDuration=(9+Math.random()*8)+'s';p.style.animationDelay=(-Math.random()*12)+'s';document.body.appendChild(p)}
+})();
+</script>
+</body>
+</html>

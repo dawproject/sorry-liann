@@ -1,0 +1,7 @@
+# Netlify: folder statis, tanpa build. /maaf/01 otomatis diarahkan ke /maaf/01/
+[build]
+  publish = "."
+[[redirects]]
+  from = "/maaf/:id"
+  to = "/maaf/:id/"
+  status = 301
